@@ -465,7 +465,7 @@ public class RichEditorWebView: WKWebView {
         
         let callbackPrefix2 = "re-state://"
         
-        if request.url?.absoluteString.hasPrefix(callbackPrefix2) == true {
+        if navigationAction.request.url?.absoluteString.hasPrefix(callbackPrefix2) == true {
             
             print("######")
             
