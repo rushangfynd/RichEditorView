@@ -24,6 +24,14 @@ document.addEventListener("selectionchange", function() {
     RE.backuprange();
 });
 
+document.addEventListener('keydown', function(event) {
+  if (event.keyCode === 13) {
+      RE.callback("return");
+    // You can replace the alert with any action you want to perform when the Enter key is pressed.
+  }
+});
+
+
 //looks specifically for a Range selection and not a Caret selection
 RE.rangeSelectionExists = function() {
     //!! coerces a null to bool
@@ -373,17 +381,6 @@ RE.insertTable = function(width, height) {
 
     RE.insertHTML(table.outerHTML);
     RE.callback("input");
-};
-
-RE.handleEnterKeyPress = function(){
-  if (event.key === "Enter" || event.keyCode === 13 || event.key === "return") {
-    // Do something when Enter key is pressed
-    console.log("Enter key pressed!");
-  }
-
-  console.log("Enter key pressed!!!!!!");
-
-  RE.callback("return");
 };
 
 function getNearestTableAncestor(htmlElementNode) {
