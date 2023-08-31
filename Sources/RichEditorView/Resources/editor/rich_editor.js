@@ -31,6 +31,56 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
+
+RE.enabledEditingItems = function(e) {
+    var items = [];
+    if (document.queryCommandState('bold')) {
+        items.push('bold');
+    }
+    if (document.queryCommandState('italic')) {
+        items.push('italic');
+    }
+    if (document.queryCommandState('subscript')) {
+        items.push('subscript');
+    }
+    if (document.queryCommandState('superscript')) {
+        items.push('superscript');
+    }
+    if (document.queryCommandState('strikeThrough')) {
+        items.push('strikeThrough');
+    }
+    if (document.queryCommandState('underline')) {
+        items.push('underline');
+    }
+    if (document.queryCommandState('insertOrderedList')) {
+        items.push('orderedList');
+    }
+    if (document.queryCommandState('insertUnorderedList')) {
+        items.push('unorderedList');
+    }
+    if (document.queryCommandState('justifyCenter')) {
+        items.push('justifyCenter');
+    }
+    if (document.queryCommandState('justifyFull')) {
+        items.push('justifyFull');
+    }
+    if (document.queryCommandState('justifyLeft')) {
+        items.push('justifyLeft');
+    }
+    if (document.queryCommandState('justifyRight')) {
+        items.push('justifyRight');
+    }
+    if (document.queryCommandState('insertHorizontalRule')) {
+        items.push('horizontalRule');
+    }
+    var formatBlock = document.queryCommandValue('formatBlock');
+    if (formatBlock.length > 0) {
+        items.push(formatBlock);
+    }
+
+    RE.callback(items)
+}
+
 document.addEventListener('click', function(event) {
   // This code will be executed whenever a click occurs anywhere inside the document.
   // You can replace this code with any action you want to perform when a click happens.
@@ -42,7 +92,7 @@ document.addEventListener('click', function(event) {
     const target = event.target.textContent
 // You can replace this code with any action you want to perform when a click happens.
 
-     RE.callback(tagName + target);
+     RE.callback(enabledEditingItems);
 });
 
 
