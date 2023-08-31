@@ -94,9 +94,9 @@ document.addEventListener('click', function(event) {
          items.push(formatBlock);
      }
 
-     const name = items.length + "items"
+     const selectedItem = items.toString()
 
-     RE.callback(items)
+     RE.callback(selectedItem)
 
 });
 
