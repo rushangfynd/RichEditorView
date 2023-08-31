@@ -35,6 +35,12 @@ document.addEventListener('click', function(event) {
   // This code will be executed whenever a click occurs anywhere inside the document.
   // You can replace this code with any action you want to perform when a click happens.
     RE.callback("clickedsomewhere");
+    const clickX = event.clientX;
+    const clickY = event.clientY;
+// Get the HTML tag of the clicked element
+    const tagName = event.target.tagName;
+// You can replace this code with any action you want to perform when a click happens.
+    console.log(`Clicked at (${clickX}, ${clickY}). Element tag: ${tagName}`);
 });
 
 
