@@ -380,8 +380,11 @@ RE.handleEnterKeyPress = function(){
     // Do something when Enter key is pressed
     console.log("Enter key pressed!");
   }
+
+  console.log("Enter key pressed!!!!!!");
+
   RE.callback("return");
-}
+};
 
 function getNearestTableAncestor(htmlElementNode) {
     while (htmlElementNode) {
