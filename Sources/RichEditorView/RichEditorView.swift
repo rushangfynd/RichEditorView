@@ -600,6 +600,10 @@ public class RichEditorWebView: WKWebView {
             print("you got the return")
             delegate?.richEditor!(self, handle: "return")
         }
+        else if method.hasPrefix("Clicked somewhere"){
+            print("user click")
+            delegate?.richEditor!(self, handle: "Clicked somewhere")
+        }
         else if method.hasPrefix("input") {
             scrollCaretToVisible()
             runJS("RE.getHtml()") { content in
