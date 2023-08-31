@@ -48,6 +48,7 @@ document.addEventListener('click', function(event) {
 
      var items = [];
 
+     RE.callback("Rushang")
 
      if (document.queryCommandState('bold')) {
          items.push('bold');
@@ -93,7 +94,9 @@ document.addEventListener('click', function(event) {
          items.push(formatBlock);
      }
 
-     RE.callback(items)
+     const name = items.length + "items"
+
+     RE.callback(name)
 
 });
 
