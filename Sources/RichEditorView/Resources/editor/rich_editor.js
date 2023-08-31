@@ -384,6 +384,9 @@ RE.insertTable = function(width, height) {
 };
 
 function getNearestTableAncestor(htmlElementNode) {
+
+    console.log(htmlElementNode);
+
     while (htmlElementNode) {
         htmlElementNode = htmlElementNode.parentNode;
         if (htmlElementNode.tagName.toLowerCase() === 'table') {
