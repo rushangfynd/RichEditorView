@@ -60,6 +60,23 @@ function getCaretClientPosition() {
 }
 
 //looks specifically for a Range selection and not a Caret selection
+RE.currentCaretposition = function() {
+  var x = 0, y = 0;
+  var sel = window.getSelection();
+  if (sel.rangeCount) {
+      var range = sel.getRangeAt(0);
+      if (range.getClientRects) {
+          var rects = range.getClientRects();
+          if (rects.length > 0) {
+              x = rects[0].left;
+              y = rects[0].top;
+          }
+      }
+  }
+  return { x: x, y: y };
+}
+
+//looks specifically for a Range selection and not a Caret selection
 RE.rangeSelectionExists = function() {
     //!! coerces a null to bool
     var sel = document.getSelection();
