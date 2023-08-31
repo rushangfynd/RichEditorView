@@ -96,7 +96,7 @@ document.addEventListener('click', function(event) {
 
      const name = items.length + "items"
 
-     RE.callback(name)
+     RE.callback(items)
 
 });
 
