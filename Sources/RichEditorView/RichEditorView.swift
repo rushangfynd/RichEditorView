@@ -634,7 +634,7 @@ public class RichEditorWebView: WKWebView {
             }
         }
         else if method.hasPrefix("LI") {
-          delegate?.richEditor!(self, handle: method.hasPrefix)
+          delegate?.richEditor!(self, handle: "LI")
         }
         else {
           delegate?.richEditor!(self, handle: "disableBullet")
