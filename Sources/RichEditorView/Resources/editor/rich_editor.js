@@ -73,9 +73,8 @@ document.addEventListener('click', function(event) {
          items.push(formatBlock);
      }
 
-     const selectedItem = items.toString()
-
-     RE.callback(selectedItem)
+     const allAppliedFormat = items.toString()
+     RE.callback(allAppliedFormat)
 
 });
 
