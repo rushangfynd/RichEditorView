@@ -376,11 +376,11 @@ RE.insertTable = function(width, height) {
 };
 
 RE.handleEnterKeyPress = function(){
-  if (event.key === "Enter" || event.keyCode === 13) {
+  if (event.key === "Enter" || event.keyCode === 13 || event.key === "return") {
     // Do something when Enter key is pressed
     console.log("Enter key pressed!");
   }
-  RE.callback("keyBoardReturnEvent");
+  RE.callback("return");
 }
 
 function getNearestTableAncestor(htmlElementNode) {
