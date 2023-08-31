@@ -41,7 +41,9 @@ document.addEventListener('click', function(event) {
     const tagName = event.target.tagName;
 // You can replace this code with any action you want to perform when a click happens.
 
-     RE.callback("Clicked at (${clickX}, ${clickY}). Element tag: ${tagName}");
+    const eventName =  "disableUnorderedListButton" + clickX + clickY +  "Element tag" + tagName
+
+     RE.callback(eventName);
 });
 
 
