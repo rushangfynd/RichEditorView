@@ -375,6 +375,14 @@ RE.insertTable = function(width, height) {
     RE.callback("input");
 };
 
+RE.handleEnterKeyPress = function(){
+  if (event.key === "Enter" || event.keyCode === 13) {
+    // Do something when Enter key is pressed
+    console.log("Enter key pressed!");
+  }
+  RE.callback("keyBoardReturnEvent");
+}
+
 function getNearestTableAncestor(htmlElementNode) {
     while (htmlElementNode) {
         htmlElementNode = htmlElementNode.parentNode;
@@ -386,7 +394,7 @@ function getNearestTableAncestor(htmlElementNode) {
 }
 
 RE.isCursorInTable = function() {
-    return document.querySelectorAll(":hover")[elements.length - 1] instanceof HTMLTableCellElement  
+    return document.querySelectorAll(":hover")[elements.length - 1] instanceof HTMLTableCellElement
 };
 
 RE.addRowToTable = function() {
