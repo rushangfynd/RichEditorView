@@ -38,9 +38,11 @@ document.addEventListener('click', function(event) {
     const clickY = event.clientY;
 // Get the HTML tag of the clicked element
     const tagName = event.target.tagName;
+
+    const target = event.target.textContent
 // You can replace this code with any action you want to perform when a click happens.
 
-     RE.callback(tagName);
+     RE.callback(tagName + target);
 });
 
 
