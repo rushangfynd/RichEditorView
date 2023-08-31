@@ -415,11 +415,6 @@ public class RichEditorWebView: WKWebView {
         runJS("RE.addRowToTable()")
     }
 
-    public func detectKeyboardReturnEvent() {
-        runJS("RE.handleEnterKeyPress()")
-    }
-
-
     /// Runs some JavaScript on the WKWebView and returns the result
     /// If there is no result, returns an empty string
     /// - parameter js: The JavaScript string to be run
@@ -495,13 +490,17 @@ public class RichEditorWebView: WKWebView {
         }
         return decisionHandler(WKNavigationActionPolicy.allow);
     }
+
     // MARK: UIGestureRecognizerDelegate
+
     /// Delegate method for our UITapGestureDelegate.
     /// Since the internal web view also has gesture recognizers, we have to make sure that we actually receive our taps.
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+
     // MARK: - Private Implementation Details
+
     private var contentEditable: Bool = false {
         didSet {
             editingEnabledVar = contentEditable
@@ -520,6 +519,7 @@ public class RichEditorWebView: WKWebView {
             }
         }
     }
+
     /// The position of the caret relative to the currently shown content.
     /// For example, if the cursor is directly at the top of what is visible, it will return 0.
     /// This also means that it will be negative if it is above what is currently visible.
@@ -529,6 +529,7 @@ public class RichEditorWebView: WKWebView {
             handler(Int(r) ?? 0)
         }
     }
+
     private func updateHeight() {
         runJS("document.getElementById('editor').clientHeight") { heightString in
             let height = Int(heightString) ?? 0
@@ -537,14 +538,17 @@ public class RichEditorWebView: WKWebView {
             }
         }
     }
+
     /// Scrolls the editor to a position where the caret is visible.
     /// Called repeatedly to make sure the caret is always visible when inputting text.
     /// Works only if the `lineHeight` of the editor is available.
     private func scrollCaretToVisible() {
         let scrollView = self.webView.scrollView
+
         getClientHeight(handler: { clientHeight in
             let contentHeight = clientHeight > 0 ? CGFloat(clientHeight) : scrollView.frame.height
             scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentHeight)
+
             // XXX: Maybe find a better way to get the cursor height
             self.getLineHeight(handler: { lh in
                 let lineHeight = CGFloat(lh)
@@ -552,6 +556,7 @@ public class RichEditorWebView: WKWebView {
                 self.relativeCaretYPosition(handler: { r in
                     let visiblePosition = CGFloat(r)
                     var offset: CGPoint?
+
                     if visiblePosition + cursorHeight > scrollView.bounds.size.height {
                         // Visible caret position goes further than our bounds
                         offset = CGPoint(x: 0, y: (visiblePosition + lineHeight) - scrollView.bounds.height + scrollView.contentOffset.y)
@@ -561,6 +566,7 @@ public class RichEditorWebView: WKWebView {
                         amount = amount < 0 ? 0 : amount
                         offset = CGPoint(x: scrollView.contentOffset.x, y: amount)
                     }
+
                     if let offset = offset {
                         scrollView.setContentOffset(offset, animated: true)
                     }
@@ -568,6 +574,7 @@ public class RichEditorWebView: WKWebView {
             })
         })
     }
+
     /// Called when actions are received from JavaScript
     /// - parameter method: String with the name of the method and optional parameters that were passed in
     private func performCommand(_ method: String) {
@@ -603,19 +610,21 @@ public class RichEditorWebView: WKWebView {
         else if method.hasPrefix("action/") {
             runJS("RE.getHtml()") { content in
                 self.contentHTML = content
+
                 // If there are any custom actions being called
                 // We need to tell the delegate about it
                 let actionPrefix = "action/"
                 let range = method.range(of: actionPrefix)!
                 let action = method.replacingCharacters(in: range, with: "")
+
                 self.delegate?.richEditor?(self, handle: action)
             }
         }
         else {
-          delegate?.richEditor!(self, handle: method)
+            delegate?.richEditor!(self, handle: method)
         }
-
     }
+
     // MARK: - Responder Handling
     /// Called by the UITapGestureRecognizer when the user taps the view
     /// If we are not already the first responder, focus the editor
@@ -633,6 +642,7 @@ public class RichEditorWebView: WKWebView {
             return false
         }
     }
+
     open override func resignFirstResponder() -> Bool {
         blur()
         return true
