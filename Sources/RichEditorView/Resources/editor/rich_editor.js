@@ -34,7 +34,7 @@ document.addEventListener('keydown', function(event) {
 document.addEventListener('click', function(event) {
   // This code will be executed whenever a click occurs anywhere inside the document.
   // You can replace this code with any action you want to perform when a click happens.
-    RE.callback("Clicked somewhere");
+    RE.callback("clickedsomewhere");
 });
 
 
