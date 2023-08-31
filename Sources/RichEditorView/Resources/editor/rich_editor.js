@@ -40,12 +40,12 @@ document.addEventListener('click', function(event) {
     const tagName = event.target.tagName;
 // You can replace this code with any action you want to perform when a click happens.
 
-     if tagName == "LI"{
-        RE.callback("enableBullet");
-     } else {
-        RE.callback("disableBullet");
-     }
-
+     // if tagName == "LI"{
+     //    RE.callback("enableBullet");
+     // } else {
+     //    RE.callback("disableBullet");
+     // }
+     // 
 });
 
 
