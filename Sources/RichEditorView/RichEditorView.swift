@@ -495,9 +495,7 @@ public class RichEditorWebView: WKWebView {
         }
         return decisionHandler(WKNavigationActionPolicy.allow);
     }
-
     // MARK: UIGestureRecognizerDelegate
-
     /// Delegate method for our UITapGestureDelegate.
     /// Since the internal web view also has gesture recognizers, we have to make sure that we actually receive our taps.
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -531,7 +529,6 @@ public class RichEditorWebView: WKWebView {
             handler(Int(r) ?? 0)
         }
     }
-
     private func updateHeight() {
         runJS("document.getElementById('editor').clientHeight") { heightString in
             let height = Int(heightString) ?? 0
@@ -555,7 +552,6 @@ public class RichEditorWebView: WKWebView {
                 self.relativeCaretYPosition(handler: { r in
                     let visiblePosition = CGFloat(r)
                     var offset: CGPoint?
-
                     if visiblePosition + cursorHeight > scrollView.bounds.size.height {
                         // Visible caret position goes further than our bounds
                         offset = CGPoint(x: 0, y: (visiblePosition + lineHeight) - scrollView.bounds.height + scrollView.contentOffset.y)
@@ -565,7 +561,6 @@ public class RichEditorWebView: WKWebView {
                         amount = amount < 0 ? 0 : amount
                         offset = CGPoint(x: scrollView.contentOffset.x, y: amount)
                     }
-
                     if let offset = offset {
                         scrollView.setContentOffset(offset, animated: true)
                     }
@@ -573,7 +568,6 @@ public class RichEditorWebView: WKWebView {
             })
         })
     }
-
     /// Called when actions are received from JavaScript
     /// - parameter method: String with the name of the method and optional parameters that were passed in
     private func performCommand(_ method: String) {
