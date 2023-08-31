@@ -597,7 +597,8 @@ public class RichEditorWebView: WKWebView {
             updateHeight()
         }
         else if method.hasPrefix("return") {
-          print("you got the return")
+            print("you got the return")
+            delegate?.richEditor(self, handle: "return")
         }
         else if method.hasPrefix("input") {
             scrollCaretToVisible()
