@@ -24,31 +24,10 @@ document.addEventListener("selectionchange", function() {
     RE.backuprange();
 });
 
-document.addEventListener('keydown', function(event) {
-  if (event.keyCode === 13) {
-      RE.callback("return");
-    // You can replace the alert with any action you want to perform when the Enter key is pressed.
-  }
-});
-
-
-
 document.addEventListener('click', function(event) {
   // This code will be executed whenever a click occurs anywhere inside the document.
   // You can replace this code with any action you want to perform when a click happens.
-    const clickX = event.clientX;
-    const clickY = event.clientY;
-// Get the HTML tag of the clicked element
-    const tagName = event.target.tagName;
-
-    const target = event.target.textContent
-// You can replace this code with any action you want to perform when a click happens.
-
-
-
      var items = [];
-
-     RE.callback("Rushang")
 
      if (document.queryCommandState('bold')) {
          items.push('bold');
