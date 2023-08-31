@@ -621,7 +621,9 @@ public class RichEditorWebView: WKWebView {
             }
         }
         else {
-            delegate?.richEditor!(self, handle: method)
+          if let delegate = delegate{
+              delegate.richEditor?(self, handle:method)
+          }
         }
     }
 
