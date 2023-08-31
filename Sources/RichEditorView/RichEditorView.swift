@@ -503,9 +503,7 @@ public class RichEditorWebView: WKWebView {
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
-
     // MARK: - Private Implementation Details
-
     private var contentEditable: Bool = false {
         didSet {
             editingEnabledVar = contentEditable
@@ -524,7 +522,6 @@ public class RichEditorWebView: WKWebView {
             }
         }
     }
-
     /// The position of the caret relative to the currently shown content.
     /// For example, if the cursor is directly at the top of what is visible, it will return 0.
     /// This also means that it will be negative if it is above what is currently visible.
@@ -543,17 +540,14 @@ public class RichEditorWebView: WKWebView {
             }
         }
     }
-
     /// Scrolls the editor to a position where the caret is visible.
     /// Called repeatedly to make sure the caret is always visible when inputting text.
     /// Works only if the `lineHeight` of the editor is available.
     private func scrollCaretToVisible() {
         let scrollView = self.webView.scrollView
-
         getClientHeight(handler: { clientHeight in
             let contentHeight = clientHeight > 0 ? CGFloat(clientHeight) : scrollView.frame.height
             scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentHeight)
-
             // XXX: Maybe find a better way to get the cursor height
             self.getLineHeight(handler: { lh in
                 let lineHeight = CGFloat(lh)
@@ -596,14 +590,6 @@ public class RichEditorWebView: WKWebView {
             }
             updateHeight()
         }
-        else if method.hasPrefix("return") {
-            print("you got the return")
-            delegate?.richEditor!(self, handle: "return")
-        }
-        else if method.hasPrefix("clickedsomewhere"){
-            print("user click")
-            delegate?.richEditor!(self, handle: "clickedsomewhere")
-        }
         else if method.hasPrefix("input") {
             scrollCaretToVisible()
             runJS("RE.getHtml()") { content in
@@ -623,25 +609,19 @@ public class RichEditorWebView: WKWebView {
         else if method.hasPrefix("action/") {
             runJS("RE.getHtml()") { content in
                 self.contentHTML = content
-
                 // If there are any custom actions being called
                 // We need to tell the delegate about it
                 let actionPrefix = "action/"
                 let range = method.range(of: actionPrefix)!
                 let action = method.replacingCharacters(in: range, with: "")
-
                 self.delegate?.richEditor?(self, handle: action)
             }
-        }
-        else if method.hasPrefix("LI") {
-          delegate?.richEditor!(self, handle: "LI")
         }
         else {
           delegate?.richEditor!(self, handle: method)
         }
 
     }
-
     // MARK: - Responder Handling
     /// Called by the UITapGestureRecognizer when the user taps the view
     /// If we are not already the first responder, focus the editor
@@ -659,7 +639,6 @@ public class RichEditorWebView: WKWebView {
             return false
         }
     }
-
     open override func resignFirstResponder() -> Bool {
         blur()
         return true
