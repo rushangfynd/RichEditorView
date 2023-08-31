@@ -633,6 +633,9 @@ public class RichEditorWebView: WKWebView {
                 self.delegate?.richEditor?(self, handle: action)
             }
         }
+        else {
+          delegate?.richEditor!(self, handle: "isBulletSelected \(method)")
+        }
     }
 
     // MARK: - Responder Handling
