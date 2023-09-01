@@ -24,10 +24,31 @@ document.addEventListener("selectionchange", function() {
     RE.backuprange();
 });
 
+// Check if the current selection
+function isSelectionInTag(tag)
+{
+	// Get the current node
+	let currentNode = window.getSelection().focusNode;
+	// While the node is not the editor division
+	while (currentNode.id !== 'editor')
+	{
+		// Check if the node is the requested tag
+		if (currentNode.tagName === tag) return true;
+		// Move up in the tree
+		currentNode = currentNode.parentNode;
+	}
+	return false;
+}
+
+
 document.addEventListener('click', function(event) {
   // This code will be executed whenever a click occurs anywhere inside the document.
   // You can replace this code with any action you want to perform when a click happens.
      var items = [];
+
+     if isSelectionInTag('insertUnorderedList'){
+         items.push('unorderedList');
+     }
 
      if (document.queryCommandState('bold')) {
          items.push('bold');
@@ -50,9 +71,9 @@ document.addEventListener('click', function(event) {
      if (document.queryCommandState('insertOrderedList')) {
          items.push('orderedList');
      }
-     if (document.queryCommandState('insertUnorderedList')) {
-         items.push('unorderedList');
-     }
+     // if (document.queryCommandState('insertUnorderedList')) {
+     //     items.push('unorderedList');
+     // }
      if (document.queryCommandState('justifyCenter')) {
          items.push('justifyCenter');
      }
