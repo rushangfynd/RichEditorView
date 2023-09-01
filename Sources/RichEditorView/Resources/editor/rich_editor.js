@@ -74,7 +74,7 @@ document.addEventListener('click', function(event) {
      }
 
      const allAppliedFormat = items.toString()
-     //RE.callback(allAppliedFormat)
+     RE.callback(allAppliedFormat)
 
 });
 
